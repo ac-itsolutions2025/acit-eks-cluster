@@ -1,0 +1,124 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Provision an Amazon EKS cluster, a managed node group, and EKS add-ons
+
+Parameters:
+  ClusterName:
+    Type: String
+    Default: acit-eks
+    Description: Name of the EKS cluster
+
+  KubernetesVersion:
+    Type: String
+    Default: "1.29"
+    Description: EKS Kubernetes version
+
+  VpcId:
+    Type: AWS::EC2::VPC::Id
+    Description: VPC to deploy the cluster in
+
+  SubnetIds:
+    Type: List<AWS::EC2::Subnet::Id>
+    Description: List of subnets across multiple AZs
+
+  ClusterAdminRoleArn:
+    Type: String
+    Description: IAM Role ARN for EKS control plane
+
+  NodeInstanceRoleArn:
+    Type: String
+    Description: IAM Role ARN for worker nodes
+
+  NodeGroupName:
+    Type: String
+    Default: acit-nodegroup
+    Description: Name of the EKS managed node group
+
+  InstanceTypes:
+    Type: List<String>
+    Default: ["t3.medium"]
+
+  DesiredCapacity:
+    Type: Number
+    Default: 2
+
+  MinSize:
+    Type: Number
+    Default: 1
+
+  MaxSize:
+    Type: Number
+    Default: 4
+
+Resources:
+
+  ### 🔹 EKS Control Plane
+  EKSCluster:
+    Type: AWS::EKS::Cluster
+    Properties:
+      Name: !Ref ClusterName
+      Version: !Ref KubernetesVersion
+      RoleArn: !Ref ClusterAdminRoleArn
+      ResourcesVpcConfig:
+        SubnetIds: !Ref SubnetIds
+        EndpointPrivateAccess: false
+        EndpointPublicAccess: true
+
+  ### 🔹 Node Group (after control plane)
+  EKSNodeGroup:
+    Type: AWS::EKS::Nodegroup
+    DependsOn: EKSCluster
+    Properties:
+      ClusterName: !Ref ClusterName
+      NodegroupName: !Ref NodeGroupName
+      NodeRole: !Ref NodeInstanceRoleArn
+      Subnets: !Ref SubnetIds
+      ScalingConfig:
+        DesiredSize: !Ref DesiredCapacity
+        MinSize: !Ref MinSize
+        MaxSize: !Ref MaxSize
+      AmiType: AL2_x86_64
+      InstanceTypes: !Ref InstanceTypes
+      DiskSize: 20
+      Tags:
+        Project: acit-lab
+
+  ### 🔹 Add-ons (after cluster)
+  VpcCniAddon:
+    Type: AWS::EKS::Addon
+    DependsOn: EKSCluster
+    Properties:
+      ClusterName: !Ref ClusterName
+      AddonName: vpc-cni
+      AddonVersion: "v1.15.4-eksbuild.1"
+      ResolveConflicts: OVERWRITE
+
+  CoreDnsAddon:
+    Type: AWS::EKS::Addon
+    DependsOn: EKSCluster
+    Properties:
+      ClusterName: !Ref ClusterName
+      AddonName: coredns
+      AddonVersion: "v1.10.1-eksbuild.1"
+      ResolveConflicts: OVERWRITE
+
+  KubeProxyAddon:
+    Type: AWS::EKS::Addon
+    DependsOn: EKSCluster
+    Properties:
+      ClusterName: !Ref ClusterName
+      AddonName: kube-proxy
+      AddonVersion: "v1.29.1-eksbuild.1"
+      ResolveConflicts: OVERWRITE
+
+Outputs:
+  ClusterName:
+    Value: !Ref EKSCluster
+
+  NodeGroupName:
+    Value: !Ref EKSNodeGroup
+
+  ClusterEndpoint:
+    Value: !GetAtt EKSCluster.Endpoint
+
+  VpcCniAddon:
+    Value: !Ref VpcCniAddon
