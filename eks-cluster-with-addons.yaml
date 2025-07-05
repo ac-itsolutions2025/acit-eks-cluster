@@ -4,7 +4,7 @@ Description: Provision an Amazon EKS cluster, a managed node group, and EKS add-
 Parameters:
   ClusterName:
     Type: String
-    Default: acit-eks
+    Default: acit-eks-group-two
     Description: Name of the EKS cluster
 
   KubernetesVersion:
