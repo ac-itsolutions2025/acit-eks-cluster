@@ -4,7 +4,7 @@ Description: Provision an Amazon EKS cluster, a managed node group, and EKS add-
 Parameters:
   ClusterName:
     Type: String
-    Default: acit-eks-group-two
+    Default: acit-demo-eks-cluster
     Description: Name of the EKS cluster
 
   KubernetesVersion:
@@ -84,7 +84,6 @@ Resources:
     Properties:
       ClusterName: !Ref ClusterName
       AddonName: vpc-cni
-      AddonVersion: "v1.15.4-eksbuild.1"
       ResolveConflicts: OVERWRITE
 
   CoreDnsAddon:
@@ -93,7 +92,6 @@ Resources:
     Properties:
       ClusterName: !Ref ClusterName
       AddonName: coredns
-      AddonVersion: "v1.10.1-eksbuild.1"
       ResolveConflicts: OVERWRITE
 
   KubeProxyAddon:
@@ -102,7 +100,6 @@ Resources:
     Properties:
       ClusterName: !Ref ClusterName
       AddonName: kube-proxy
-      AddonVersion: "v1.29.1-eksbuild.1"
       ResolveConflicts: OVERWRITE
 
 Outputs:
