@@ -29,9 +29,10 @@ Parameters:
     Default: acit-nodegroup
     Description: Name of the EKS managed node group
 
-  InstanceTypes:
+  InstanceType:
     Type: String
-    Default: "t3.medium"
+    Default: t3.medium
+    Description: EC2 instance type for the node group
 
   DesiredCapacity:
     Type: Number
@@ -71,7 +72,8 @@ Resources:
         MinSize: !Ref MinSize
         MaxSize: !Ref MaxSize
       AmiType: AL2_x86_64
-      InstanceTypes: !Ref InstanceTypes
+      InstanceTypes:
+        - !Ref InstanceType
       DiskSize: 20
       Tags:
         Project: acit-lab
@@ -105,13 +107,17 @@ Resources:
 
 Outputs:
   ClusterName:
+    Description: The name of the EKS cluster
     Value: !Ref EKSCluster
 
   ClusterEndpoint:
+    Description: API server endpoint
     Value: !GetAtt EKSCluster.Endpoint
 
   NodeGroupName:
+    Description: Managed node group name
     Value: !Ref EKSNodeGroup
 
   VpcCniAddon:
+    Description: VPC CNI add-on reference
     Value: !Ref VpcCniAddon
