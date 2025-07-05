@@ -30,8 +30,8 @@ Parameters:
     Description: Name of the EKS managed node group
 
   InstanceTypes:
-    Type: List<String>
-    Default: ["t3.medium"]
+    Type: String
+    Default: "t3.medium"
 
   DesiredCapacity:
     Type: Number
