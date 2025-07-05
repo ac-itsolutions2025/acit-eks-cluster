@@ -4,7 +4,7 @@ pipeline {
   environment {
     STACK_NAME      = 'acit-eks-group-two'
     TEMPLATE_FILE   = 'eks-cluster-with-addons.yaml'
-    REGION          = 'us-east-2'
+    REGION          = 'us-east-1'
 
     CLUSTER_NAME    = 'acit-eks'
     K8S_VERSION     = '1.33'
