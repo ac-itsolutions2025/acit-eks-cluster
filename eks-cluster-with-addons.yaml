@@ -9,12 +9,8 @@ Parameters:
 
   KubernetesVersion:
     Type: String
-    Default: "1.29"
+    Default: "1.33"
     Description: EKS Kubernetes version
-
-  VpcId:
-    Type: AWS::EC2::VPC::Id
-    Description: VPC to deploy the cluster in
 
   SubnetIds:
     Type: List<AWS::EC2::Subnet::Id>
@@ -51,7 +47,6 @@ Parameters:
 
 Resources:
 
-  ### 🔹 EKS Control Plane
   EKSCluster:
     Type: AWS::EKS::Cluster
     Properties:
@@ -63,7 +58,6 @@ Resources:
         EndpointPrivateAccess: false
         EndpointPublicAccess: true
 
-  ### 🔹 Node Group (after control plane)
   EKSNodeGroup:
     Type: AWS::EKS::Nodegroup
     DependsOn: EKSCluster
@@ -82,7 +76,6 @@ Resources:
       Tags:
         Project: acit-lab
 
-  ### 🔹 Add-ons (after cluster)
   VpcCniAddon:
     Type: AWS::EKS::Addon
     DependsOn: EKSCluster
@@ -114,11 +107,11 @@ Outputs:
   ClusterName:
     Value: !Ref EKSCluster
 
-  NodeGroupName:
-    Value: !Ref EKSNodeGroup
-
   ClusterEndpoint:
     Value: !GetAtt EKSCluster.Endpoint
+
+  NodeGroupName:
+    Value: !Ref EKSNodeGroup
 
   VpcCniAddon:
     Value: !Ref VpcCniAddon
