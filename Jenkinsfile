@@ -2,7 +2,7 @@ pipeline {
   agent any
 
   environment {
-    STACK_NAME      = 'acit-eks-cluster'
+    STACK_NAME      = 'acit-eks-group-two'
     TEMPLATE_FILE   = 'eks-cluster-with-addons.yaml'
     REGION          = 'us-east-2'
 
