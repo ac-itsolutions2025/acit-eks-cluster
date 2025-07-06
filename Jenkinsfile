@@ -6,7 +6,7 @@ pipeline {
     TEMPLATE_FILE   = 'eks-cluster-with-addons.yaml'
     REGION          = 'us-east-2'
 
-    CLUSTER_NAME    = 'acit-eks'
+    CLUSTER_NAME    = 'acit-eks-group-one'
     K8S_VERSION     = '1.33'
     VPC_ID          = 'vpc-0ab04656e45f63cb7'            // Replace with actual VPC ID
     SUBNET_IDS      = 'subnet-0f466e83f27e135df,subnet-03d42a7f417e15476'  // Must be in different AZs
@@ -46,7 +46,7 @@ pipeline {
 
     stage('Deploy EKS Stack') {
       steps {
-        echo '🚀 Deploying EKS control plane, node group, and add-ons'
+        echo 'Deploying EKS control plane, node group, and add-ons'
         sh '''
           aws cloudformation deploy \
             --stack-name "$STACK_NAME" \
@@ -71,7 +71,7 @@ pipeline {
 
     stage('Describe Stack Outputs') {
       steps {
-        echo '📡 EKS Deployment Outputs:'
+        echo 'EKS Deployment Outputs:'
         sh '''
           aws cloudformation describe-stacks \
             --stack-name "$STACK_NAME" \
@@ -85,14 +85,14 @@ pipeline {
 
   post {
     always {
-      echo '🧼 Cleaning up virtualenv...'
+      echo 'Cleaning up virtualenv...'
       sh 'rm -rf .venv || true'
     }
     success {
-      echo '✅ EKS platform deployed successfully!'
+      echo 'EKS platform deployed successfully!'
     }
     failure {
-      echo '❌ Stack deployment failed. Check logs above.'
+      echo 'Stack deployment failed. Check logs above.'
     }
   }
 }
