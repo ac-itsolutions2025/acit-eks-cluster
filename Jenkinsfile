@@ -12,7 +12,7 @@ pipeline {
     SUBNET_IDS      = 'subnet-0f466e83f27e135df,subnet-03d42a7f417e15476'  // Must be in different AZs
     ADMIN_ROLE_ARN  = 'arn:aws:iam::124355683348:role/acit-EKSClusterRole'
     NODE_ROLE_ARN   = 'arn:aws:iam::124355683348:role/acit-EKSNodeInstanceRole'
-    NODEGROUP_NAME  = 'acit-eks-nodegroup-one'
+    NODEGROUP_NAME  = 'acit-eks-group-one-nodegroup'
     INSTANCE_TYPES  = 't3.large'
     DESIRED_CAP     = '2'
     MIN_SIZE        = '1'
