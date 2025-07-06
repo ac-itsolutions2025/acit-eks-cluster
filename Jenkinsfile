@@ -15,7 +15,7 @@ pipeline {
     NODEGROUP_NAME  = 'acit-eks-group-one-nodegroup'
     INSTANCE_TYPES  = 't3.large'
     DESIRED_CAP     = '2'
-    MIN_SIZE        = '2'
+    MIN_SIZE        = '1'
     MAX_SIZE        = '4'
   }
 
