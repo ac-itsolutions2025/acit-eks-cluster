@@ -10,8 +10,8 @@ pipeline {
     K8S_VERSION     = '1.33'
     VPC_ID          = ' vpc-088483489a44f4b75'            // Replace with actual VPC ID
     SUBNET_IDS      = 'subnet-0f7b223e161e1e920,subnet-0ebaa731ccca1bd2c'  // Must be in different AZs
-    ADMIN_ROLE_ARN  = 'arn:aws:iam::124355683348:role/EKSClusterRole'
-    NODE_ROLE_ARN   = 'arn:aws:iam::124355683348:role/EKS-Node-Group-Role'
+    ADMIN_ROLE_ARN  = 'arn:aws:iam::124355683348:role/acit-EKSClusterRole'
+    NODE_ROLE_ARN   = 'arn:aws:iam::124355683348:role/acit-EKSNodeInstanceRole'
     NODEGROUP_NAME  = 'acit-nodegroup'
     INSTANCE_TYPES  = 't3.medium'
     DESIRED_CAP     = '2'
