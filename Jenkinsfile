@@ -12,8 +12,8 @@ pipeline {
     SUBNET_IDS      = 'subnet-0f466e83f27e135df,subnet-03d42a7f417e15476'  // Must be in different AZs
     ADMIN_ROLE_ARN  = 'arn:aws:iam::124355683348:role/acit-EKSClusterRole'
     NODE_ROLE_ARN   = 'arn:aws:iam::124355683348:role/acit-EKSNodeInstanceRole'
-    NODEGROUP_NAME  = 'acit-eks-nodegroup'
-    INSTANCE_TYPES  = 't3.xlarge'
+    NODEGROUP_NAME  = 'acit-eks-nodegroup-one'
+    INSTANCE_TYPES  = 't3.large'
     DESIRED_CAP     = '2'
     MIN_SIZE        = '1'
     MAX_SIZE        = '4'
@@ -27,14 +27,14 @@ pipeline {
   stages {
     stage('Checkout Template') {
       steps {
-        echo '📦 Pulling CloudFormation template'
+        echo 'Pulling CloudFormation template'
         checkout scm
       }
     }
 
     stage('Lint Template') {
       steps {
-        echo '🔍 Validating template with cfn-lint'
+        echo 'Validating template with cfn-lint'
         sh '''
           python3 -m venv .venv
           . .venv/bin/activate
