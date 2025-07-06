@@ -36,11 +36,11 @@ Parameters:
 
   DesiredCapacity:
     Type: Number
-    Default: 2
+    Default: 0
 
   MinSize:
     Type: Number
-    Default: 1
+    Default: 0
 
   MaxSize:
     Type: Number
