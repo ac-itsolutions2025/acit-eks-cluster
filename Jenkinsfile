@@ -16,7 +16,7 @@ pipeline {
     INSTANCE_TYPES  = 't3.large'
     DESIRED_CAP     = '0'
     MIN_SIZE        = '0'
-    MAX_SIZE        = '0'
+    MAX_SIZE        = '4'
   }
 
   options {
