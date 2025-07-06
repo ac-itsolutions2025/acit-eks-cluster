@@ -8,8 +8,8 @@ pipeline {
 
     CLUSTER_NAME    = 'acit-eks'
     K8S_VERSION     = '1.32'
-    VPC_ID          = ' vpc-088483489a44f4b75'            // Replace with actual VPC ID
-    SUBNET_IDS      = 'subnet-0f7b223e161e1e920,subnet-0ebaa731ccca1bd2c'  // Must be in different AZs
+    VPC_ID          = 'vpc-0ab04656e45f63cb7'            // Replace with actual VPC ID
+    SUBNET_IDS      = 'subnet-0f466e83f27e135df,subnet-03d42a7f417e15476'  // Must be in different AZs
     ADMIN_ROLE_ARN  = 'arn:aws:iam::124355683348:role/acit-EKSClusterRole'
     NODE_ROLE_ARN   = 'arn:aws:iam::124355683348:role/acit-EKSNodeInstanceRole'
     NODEGROUP_NAME  = 'acit-nodegroup'
