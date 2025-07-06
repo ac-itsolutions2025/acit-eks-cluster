@@ -13,7 +13,7 @@ pipeline {
     ADMIN_ROLE_ARN  = 'arn:aws:iam::124355683348:role/acit-EKSClusterRole'
     NODE_ROLE_ARN   = 'arn:aws:iam::124355683348:role/acit-EKSNodeInstanceRole'
     NODEGROUP_NAME  = 'acit-nodegroup'
-    INSTANCE_TYPES  = 't3.medium'
+    INSTANCE_TYPES  = 't3.xlarge'
     DESIRED_CAP     = '2'
     MIN_SIZE        = '1'
     MAX_SIZE        = '4'
