@@ -9,7 +9,7 @@ Parameters:
 
   KubernetesVersion:
     Type: String
-    Default: "1.32"
+    Default: "1.33"
     Description: EKS Kubernetes version
 
   SubnetIds:
@@ -31,7 +31,7 @@ Parameters:
 
   InstanceType:
     Type: String
-    Default: t3.medium
+    Default: t3.xlarge
     Description: EC2 instance type for the node group
 
   DesiredCapacity:
@@ -71,7 +71,7 @@ Resources:
         DesiredSize: !Ref DesiredCapacity
         MinSize: !Ref MinSize
         MaxSize: !Ref MaxSize
-      AmiType: AmiType: AL2023_x86_64_STANDARD
+      AmiType: AL2023_x86_64_STANDARD
       InstanceTypes:
         - !Ref InstanceType
       DiskSize: 20
