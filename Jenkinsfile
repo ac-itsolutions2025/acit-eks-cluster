@@ -7,7 +7,7 @@ pipeline {
     REGION          = 'us-east-1'
 
     CLUSTER_NAME    = 'acit-eks'
-    K8S_VERSION     = '1.33'
+    K8S_VERSION     = '1.32'
     VPC_ID          = ' vpc-088483489a44f4b75'            // Replace with actual VPC ID
     SUBNET_IDS      = 'subnet-0f7b223e161e1e920,subnet-0ebaa731ccca1bd2c'  // Must be in different AZs
     ADMIN_ROLE_ARN  = 'arn:aws:iam::124355683348:role/acit-EKSClusterRole'
