@@ -2,20 +2,20 @@ pipeline {
   agent any
 
   environment {
-    STACK_NAME      = 'acit-eks-demo-cluster'
+    STACK_NAME      = 'acit-eks-group-two'
     TEMPLATE_FILE   = 'eks-cluster-with-addons.yaml'
     REGION          = 'us-east-2'
 
-    CLUSTER_NAME    = 'acit-eks-group-one'
+    CLUSTER_NAME    = 'acit-eks-group-two'
     K8S_VERSION     = '1.33'
     VPC_ID          = 'vpc-0ab04656e45f63cb7'            // Replace with actual VPC ID
     SUBNET_IDS      = 'subnet-0f466e83f27e135df,subnet-03d42a7f417e15476'  // Must be in different AZs
     ADMIN_ROLE_ARN  = 'arn:aws:iam::124355683348:role/acit-EKSClusterRole'
     NODE_ROLE_ARN   = 'arn:aws:iam::124355683348:role/acit-EKSNodeInstanceRole'
-    NODEGROUP_NAME  = 'acit-eks-group-one-nodegroup'
+    NODEGROUP_NAME  = 'acit-eks-group-two-nodegroup'
     INSTANCE_TYPES  = 't3.large'
-    DESIRED_CAP     = '0'
-    MIN_SIZE        = '0'
+    DESIRED_CAP     = '1'
+    MIN_SIZE        = '1'
     MAX_SIZE        = '4'
   }
 
